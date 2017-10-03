@@ -19,7 +19,9 @@ public class GuessTheMovie {
             movieNumber++;
         }
 
+        // Pick a random movie to guess:
+        int randomNumber = (int) (Math.random()*26) + 1;
+        String randomMovie = movies[randomNumber];
 
     }
-
 }
