@@ -34,12 +34,34 @@ public class GuessTheMovie {
             }
         }
 
-        // Invite the player to guess the random hidden movie :
-        System.out.println("You are guessing: " + hiddenMovie);
+        // Invite the player to guess the hidden movie with a max of 10 attempts:
+        int wrongLetters = 0;
+        int attempts = 10;
+        String wrongLetter = "";
 
-        int guess = 0;
-        System.out.println("You have guessed (" + guess + ") wrong letters:");
+        System.out.println("You are guessing: " + hiddenMovie);
+        System.out.println("You have " + attempts + " attempts.");
         System.out.println("Guess a letter: ");
+
+        while (wrongLetters <= attempts){
+            char guessCharacter = userGuess.next().charAt(0);
+            
+            if (randomMovie.indexOf(guessCharacter) >= 0){
+                for (int i = 0; i < randomMovie.length(); i++){
+                    char randomMovieChar = randomMovie.charAt(i);
+                    if (randomMovieChar != ' ' && randomMovieChar != ':' && randomMovieChar != '-' && randomMovieChar != guessCharacter){
+                        randomMovie = randomMovie.replace(randomMovieChar, '_');
+                    }
+                }
+            } else {
+                wrongLetters++;
+                wrongLetter = wrongLetter + " " + guessCharacter;
+            }
+
+            System.out.println("You are guessing: " + randomMovie);
+            System.out.println("You have guessed (" + wrongLetters + ") wrong letters: " + wrongLetter);
+            System.out.println("Guess a letter: ");
+        }
 
     }
 }
