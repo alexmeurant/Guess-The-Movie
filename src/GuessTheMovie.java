@@ -22,9 +22,14 @@ public class GuessTheMovie {
         // Pick a random movie to guess:
         int size = movies.size();
         int randomNumber = (int) (Math.random()*size);
-        System.out.println(randomNumber);
         String randomMovie = (String) movies.get(randomNumber);
-        System.out.println(randomMovie);
 
+        // Convert randomMovie's letters to '_':
+        for (int i = 0; i < randomMovie.length(); i++){
+            char movieChar = randomMovie.charAt(i);
+            if (movieChar != ' ' && movieChar != ':' && movieChar != '-'){
+                randomMovie = randomMovie.replace(movieChar, '_');
+            }
+        }
     }
 }
