@@ -64,8 +64,11 @@ public class GuessTheMovie {
                     }
                 }
             } else {
-            wrongLetterNumber++;
-            wrongLetter += " " + guessCharacter;
+                if(wrongLetter.indexOf(guessCharacter) < 0){
+                    wrongLetterNumber++;
+                    wrongLetter += " " + guessCharacter;
+                }
+
         }
 
             System.out.println("You are guessing: " + displayMovie);
