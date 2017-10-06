@@ -68,8 +68,14 @@ public class GuessTheMovie {
                     wrongLetterNumber++;
                     wrongLetter += " " + guessCharacter;
                 }
+            }
 
-        }
+            // Print a message when player has discovered the movie title:
+            String movieDisplayed = displayMovie.toString();
+            if (movieDisplayed.indexOf('.') < 0){
+                System.out.println("You win!!!");
+                System.out.println("The movie title is : " + movieDisplayed);
+            }
 
             System.out.println("You are guessing: " + displayMovie);
             System.out.println("You have guessed (" + wrongLetterNumber + ") wrong letters: " + wrongLetter);
@@ -81,4 +87,6 @@ public class GuessTheMovie {
         }
     }
 }
+
+
 
