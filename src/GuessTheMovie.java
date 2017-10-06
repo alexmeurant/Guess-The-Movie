@@ -24,18 +24,19 @@ public class GuessTheMovie {
         int size = movies.size();
         int randomNumber = (int) (Math.random()*size);
         String randomMovie = (String) movies.get(randomNumber);
+        randomMovie = randomMovie.toLowerCase();
         String hiddenMovie = randomMovie;
 
-        // Convert randomMovie's letters to '_':
+        // Convert randomMovie's letters into '.':
         for (int i = 0; i < randomMovie.length(); i++){
             char movieChar = randomMovie.charAt(i);
             if (movieChar != ' ' && movieChar != ':' && movieChar != '-'){
-                hiddenMovie = hiddenMovie.replace(movieChar, '_');
+                hiddenMovie = hiddenMovie.replace(movieChar, '.');
             }
         }
 
         // Invite the player to guess the hidden movie with a max of 10 attempts:
-        int wrongLetters = 0;
+        int wrongLetterNumber = 0;
         int attempts = 10;
         String wrongLetter = "";
 
@@ -43,25 +44,34 @@ public class GuessTheMovie {
         System.out.println("You have " + attempts + " attempts.");
         System.out.println("Guess a letter: ");
 
-        while (wrongLetters <= attempts){
+        // create a mutable sequence of characters:
+        StringBuilder displayMovie = new StringBuilder(hiddenMovie);
+
+        // loop the movie title characters if max attempts is not reached:
+        while (wrongLetterNumber <= attempts) {
+            // Player guess a letter :
             char guessCharacter = userGuess.next().charAt(0);
-            
-            if (randomMovie.indexOf(guessCharacter) >= 0){
-                for (int i = 0; i < randomMovie.length(); i++){
-                    char randomMovieChar = randomMovie.charAt(i);
-                    if (randomMovieChar != ' ' && randomMovieChar != ':' && randomMovieChar != '-' && randomMovieChar != guessCharacter){
-                        randomMovie = randomMovie.replace(randomMovieChar, '_');
+
+            // checks if the movie title contains the guess letter:
+            if (randomMovie.indexOf(guessCharacter) >= 0) {
+                for (int i = 0; i < hiddenMovie.length(); i++) {
+                    // checks if guessed character position is equal to the movie title one:
+                    if (guessCharacter == randomMovie.charAt(i)) {
+                        // replace . by the guess character:
+                        if (displayMovie.charAt(i) == '.') {
+                            displayMovie.setCharAt(i, guessCharacter);
+                        }
                     }
                 }
             } else {
-                wrongLetters++;
-                wrongLetter = wrongLetter + " " + guessCharacter;
-            }
-
-            System.out.println("You are guessing: " + randomMovie);
-            System.out.println("You have guessed (" + wrongLetters + ") wrong letters: " + wrongLetter);
-            System.out.println("Guess a letter: ");
+            wrongLetterNumber++;
+            wrongLetter += " " + guessCharacter;
         }
 
+            System.out.println("You are guessing: " + displayMovie);
+            System.out.println("You have guessed (" + wrongLetterNumber + ") wrong letters: " + wrongLetter);
+            System.out.println("Guess another letter: ");
+        }
     }
 }
+
