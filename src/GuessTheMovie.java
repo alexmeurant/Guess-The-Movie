@@ -48,7 +48,7 @@ public class GuessTheMovie {
         StringBuilder displayMovie = new StringBuilder(hiddenMovie);
 
         // loop the movie title characters if max attempts is not reached:
-        while (wrongLetterNumber <= attempts) {
+        while (wrongLetterNumber < attempts) {
             // Player guess a letter :
             char guessCharacter = userGuess.next().charAt(0);
 
@@ -74,6 +74,10 @@ public class GuessTheMovie {
             System.out.println("You are guessing: " + displayMovie);
             System.out.println("You have guessed (" + wrongLetterNumber + ") wrong letters: " + wrongLetter);
             System.out.println("Guess another letter: ");
+        }
+        // Print a message if the limit attempts number is reached:
+        if (wrongLetterNumber >= attempts){
+            System.out.println("You lose!!!");
         }
     }
 }
